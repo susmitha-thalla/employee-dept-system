@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class DepartmentResponseDto {
 
-    private Long Deptid;
-    private String Deptname;
-    private String Deptcode;
-    private String Deptaddress;
+    private Long deptid;
+    private String deptname;
+    private String deptcode;
+    private String deptaddress;
 }
