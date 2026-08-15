@@ -9,7 +9,7 @@ import java.util.Optional;
 @Repository
 public interface DepartmentRepo extends JpaRepository<Department,Long> {
 
-     Optional<Department> findByDepartmentCode(String departmentcode);
-     boolean existsByDepartmentCode(String departmentcode);
+     Optional<Department> findByDeptcode(String departmentcode);
+     boolean existsByDeptcode(String departmentcode);
 
 }

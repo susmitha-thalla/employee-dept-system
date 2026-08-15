@@ -19,16 +19,16 @@ import java.util.List;
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
 
-    DepartmentRepo deptRepo;
+   private final DepartmentRepo deptRepo;
 
-    DepartmentMapper deptMapper;
+   private final DepartmentMapper deptMapper;
 
     @Override
     public DepartmentResponseDto createDepartment(DepartmentRequestDto deptRequestDto) {
          log.info("Creating department with code: {}",deptRequestDto.getDeptcode());
 
 
-          if(deptRepo.existsByDepartmentCode(deptRequestDto.getDeptcode())){
+          if(deptRepo.existsByDeptcode(deptRequestDto.getDeptcode())){
               throw new DuplicateDepartmentCodeException("Department with code "+deptRequestDto.getDeptcode()+" already exists");
           }
 
@@ -59,7 +59,7 @@ public class DepartmentServiceImpl implements DepartmentService {
               dept.setDeptname(requestDto.getDeptname());
               dept.setDeptaddress(requestDto.getDeptaddress());
               dept.setDeptcode(requestDto.getDeptcode());
-     Department updatedDept=deptRepo.save(dept);
+              Department updatedDept=deptRepo.save(dept);
 
      log.info("Department with id {} updated successfully",id);
      return deptMapper.toDto(updatedDept);
