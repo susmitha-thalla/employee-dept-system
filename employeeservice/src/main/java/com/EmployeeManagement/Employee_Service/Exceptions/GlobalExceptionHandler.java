@@ -3,6 +3,7 @@ package com.EmployeeManagement.Employee_Service.Exceptions;
 import com.EmployeeManagement.Employee_Service.DTOs.ErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.validation.FieldError;
 
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -50,5 +51,10 @@ public class GlobalExceptionHandler {
     private ResponseEntity<ErrorResponse> buildResponse(HttpStatus status, String message) {
         ErrorResponse errorResponse = new ErrorResponse(LocalDateTime.now(), status.value(), message, null);
         return ResponseEntity.status(status).body(errorResponse);
+    }
+
+    @ExceptionHandler(BadCredentialsException.class)
+    public ResponseEntity<ErrorResponse> handleBadCredentials(BadCredentialsException ex) {
+        return buildResponse(HttpStatus.UNAUTHORIZED, ex.getMessage());
     }
 }
