@@ -26,4 +26,11 @@ public class Employee {
     @Column(name = "department_id", nullable = false)
     private Long deptId;
 
+
+    @Column(nullable = false)
+    private String password;
+
+    @Column(nullable = false)
+    private String role;
+
 }

@@ -20,7 +20,7 @@ public class DepartmentClient {
     }
 
     public boolean departmentExists(Long deptId) {
-        String url = departmentServiceUrl + "/api/v1/department/" + deptId + "/exists";
+        String url = departmentServiceUrl + "/department/v1/" + deptId + "/exists";
         try {
             Boolean exists = restTemplate.getForObject(url, Boolean.class);
             return Boolean.TRUE.equals(exists);

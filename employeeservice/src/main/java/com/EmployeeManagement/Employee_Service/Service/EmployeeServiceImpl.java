@@ -1,7 +1,9 @@
 package com.EmployeeManagement.Employee_Service.Service;
+import com.EmployeeManagement.Employee_Service.Client.DepartmentClient;
 import com.EmployeeManagement.Employee_Service.DTOs.EmployeeRequestDto;
 import com.EmployeeManagement.Employee_Service.DTOs.EmployeeResponseDto;
 import com.EmployeeManagement.Employee_Service.Entity.Employee;
+import com.EmployeeManagement.Employee_Service.Exceptions.DepartmentNotFoundException;
 import com.EmployeeManagement.Employee_Service.Exceptions.DuplicateEmployeeEmailException;
 import com.EmployeeManagement.Employee_Service.Exceptions.EmployeeNotFoundException;
 import com.EmployeeManagement.Employee_Service.Mapper.EmployeeMapper;
@@ -19,7 +21,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     private final EmployeeRepo employeeRepo;
     private final EmployeeMapper employeeMapper;
-
+    private final DepartmentClient departmentClient;
 
     @Override
     public EmployeeResponseDto createEmployee(EmployeeRequestDto requestDto) {
@@ -28,6 +30,11 @@ public class EmployeeServiceImpl implements EmployeeService {
         if (employeeRepo.existsByEmpEmail(requestDto.getEmpEmail())) {
             throw new DuplicateEmployeeEmailException(
                     "Employee already exists with email: " + requestDto.getEmpEmail());
+        }
+        //to chek whether the particular department exists or not
+        if (!departmentClient.departmentExists(requestDto.getDeptId())) {
+            throw new DepartmentNotFoundException(
+                    "Department not found with id: " + requestDto.getDeptId());
         }
 
         Employee employee = employeeMapper.toEntity(requestDto);

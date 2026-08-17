@@ -22,33 +22,33 @@ public class EmployeeController {
 
     @PostMapping("/create")
     public ResponseEntity<EmployeeResponseDto> createEmployee(@Valid @RequestBody EmployeeRequestDto requestDto) {
-        log.info("POST /api/v1/employee/create");
+        log.info("POST /v1/employee/create");
         EmployeeResponseDto created = employeeService.createEmployee(requestDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
     }
 
     @GetMapping("/getemployees/{id}")
     public ResponseEntity<EmployeeResponseDto> getEmployeeById(@PathVariable Long id) {
-        log.info("GET /api/v1/employee/getemployees/{}", id);
+        log.info("GET /v1/employee/getemployees/{}", id);
         return ResponseEntity.ok(employeeService.getEmployeeById(id));
     }
 
     @GetMapping("/getemployees")
     public ResponseEntity<List<EmployeeResponseDto>> getAllEmployees() {
-        log.info("GET /api/v1/employee/getemployees");
+        log.info("GET /v1/employee/getemployees");
         return ResponseEntity.ok(employeeService.getAllEmployees());
     }
 
     @PutMapping("/updateemp/{id}")
     public ResponseEntity<EmployeeResponseDto> updateEmployee(
             @PathVariable Long id, @Valid @RequestBody EmployeeRequestDto requestDto) {
-        log.info("PUT /api/v1/employee/updateemp/{}", id);
+        log.info("PUT /v1/employee/updateemp/{}", id);
         return ResponseEntity.ok(employeeService.updateEmployee(id, requestDto));
     }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteEmployee(@PathVariable Long id) {
-        log.info("DELETE /api/v1/employee/delete/{}", id);
+        log.info("DELETE /v1/employee/delete/{}", id);
         employeeService.deleteEmployee(id);
         return ResponseEntity.noContent().build();
     }
